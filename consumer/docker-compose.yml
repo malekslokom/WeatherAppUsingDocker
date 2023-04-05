@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  weatherconsumer:
+    container_name: weatherconsumer
+    build: .
+    environment:
+      KAFKA_BROKER_URL: localhost:9092 #broker:9092
+      TOPIC_NAME: weather
+      CASSANDRA_HOST: cassandra
+      CASSANDRA_KEYSPACE: kafkapipeline
+    command: ["python", "-u","python/weather_consumer.py"]
+    volumes:
+      - $PWD/consumers/csvdata:/usr/app/data
+    
+    
+    
+# networks:
+#   default:
+#     external:
+#       name: kafka-network
