@@ -3,11 +3,36 @@
   "config": {
     "connector.class": "com.datastax.oss.kafka.sink.CassandraSinkConnector",
     "tasks.max": "10",
-    "topics": "weather",
+    "topics": "weather-london,weather-liverpool,weather-manchester,weather-paris,weather-nantes,weather-toulouse,weather-amsterdam,weather-rotterdam,weather-delft",
     "contactPoints": "cassandra",
     "loadBalancing.localDc": "datacenter1",
     "topic.weather.weatherdb.report.mapping": "lon=value.lon,lat=value.lat,weather=value.weather,weather_description=value.weatherDescription,temp=value.temp,feels_like=value.feels_like,temp_min=value.temp_min,temp_max=value.temp_max,pressure=value.pressure,humidity=value.humidity,visibility=value.visibility,wind_speed=value.windSpeed,clouds=value.clouds,dt=value.dt,sys_type=value.sysType,sys_id=value.sysId,sys_country=value.sysCountry,sys_sunrise=value.sysSunrise,sys_sunset=value.sysSunset,timezone=value.timezone,id=value.id,name=value.name",
-    "topic.weather.weatherdb.report.consistencyLevel": "LOCAL_QUORUM"
+    "topic.weather-london.weatherdb.reportlondon.mapping": "lon=value.lon,lat=value.lat,weather=value.weather,weather_description=value.weatherDescription,temp=value.temp,feels_like=value.feels_like,temp_min=value.temp_min,temp_max=value.temp_max,pressure=value.pressure,humidity=value.humidity,visibility=value.visibility,wind_speed=value.windSpeed,clouds=value.clouds,dt=value.dt,sys_type=value.sysType,sys_id=value.sysId,sys_country=value.sysCountry,sys_sunrise=value.sysSunrise,sys_sunset=value.sysSunset,timezone=value.timezone,id=value.id,name=value.name,time=value.time",
+    "topic.weather-liverpool.weatherdb.reportliverpool.mapping": "lon=value.lon,lat=value.lat,weather=value.weather,weather_description=value.weatherDescription,temp=value.temp,feels_like=value.feels_like,temp_min=value.temp_min,temp_max=value.temp_max,pressure=value.pressure,humidity=value.humidity,visibility=value.visibility,wind_speed=value.windSpeed,clouds=value.clouds,dt=value.dt,sys_type=value.sysType,sys_id=value.sysId,sys_country=value.sysCountry,sys_sunrise=value.sysSunrise,sys_sunset=value.sysSunset,timezone=value.timezone,id=value.id,name=value.name,time=value.time",
+    "topic.weather-manchester.weatherdb.reportmanchester.mapping": "lon=value.lon,lat=value.lat,weather=value.weather,weather_description=value.weatherDescription,temp=value.temp,feels_like=value.feels_like,temp_min=value.temp_min,temp_max=value.temp_max,pressure=value.pressure,humidity=value.humidity,visibility=value.visibility,wind_speed=value.windSpeed,clouds=value.clouds,dt=value.dt,sys_type=value.sysType,sys_id=value.sysId,sys_country=value.sysCountry,sys_sunrise=value.sysSunrise,sys_sunset=value.sysSunset,timezone=value.timezone,id=value.id,name=value.name,time=value.time",
+    
+    "topic.weather-paris.weatherdb.reportparis.mapping": "lon=value.lon,lat=value.lat,weather=value.weather,weather_description=value.weatherDescription,temp=value.temp,feels_like=value.feels_like,temp_min=value.temp_min,temp_max=value.temp_max,pressure=value.pressure,humidity=value.humidity,visibility=value.visibility,wind_speed=value.windSpeed,clouds=value.clouds,dt=value.dt,sys_type=value.sysType,sys_id=value.sysId,sys_country=value.sysCountry,sys_sunrise=value.sysSunrise,sys_sunset=value.sysSunset,timezone=value.timezone,id=value.id,name=value.name,time=value.time",
+    "topic.weather-nantes.weatherdb.reportnantes.mapping": "lon=value.lon,lat=value.lat,weather=value.weather,weather_description=value.weatherDescription,temp=value.temp,feels_like=value.feels_like,temp_min=value.temp_min,temp_max=value.temp_max,pressure=value.pressure,humidity=value.humidity,visibility=value.visibility,wind_speed=value.windSpeed,clouds=value.clouds,dt=value.dt,sys_type=value.sysType,sys_id=value.sysId,sys_country=value.sysCountry,sys_sunrise=value.sysSunrise,sys_sunset=value.sysSunset,timezone=value.timezone,id=value.id,name=value.name,time=value.time",
+    "topic.weather-toulouse.weatherdb.reporttoulouse.mapping": "lon=value.lon,lat=value.lat,weather=value.weather,weather_description=value.weatherDescription,temp=value.temp,feels_like=value.feels_like,temp_min=value.temp_min,temp_max=value.temp_max,pressure=value.pressure,humidity=value.humidity,visibility=value.visibility,wind_speed=value.windSpeed,clouds=value.clouds,dt=value.dt,sys_type=value.sysType,sys_id=value.sysId,sys_country=value.sysCountry,sys_sunrise=value.sysSunrise,sys_sunset=value.sysSunset,timezone=value.timezone,id=value.id,name=value.name,time=value.time",
+    
+    "topic.weather-amsterdam.weatherdb.reportamsterdam.mapping": "lon=value.lon,lat=value.lat,weather=value.weather,weather_description=value.weatherDescription,temp=value.temp,feels_like=value.feels_like,temp_min=value.temp_min,temp_max=value.temp_max,pressure=value.pressure,humidity=value.humidity,visibility=value.visibility,wind_speed=value.windSpeed,clouds=value.clouds,dt=value.dt,sys_type=value.sysType,sys_id=value.sysId,sys_country=value.sysCountry,sys_sunrise=value.sysSunrise,sys_sunset=value.sysSunset,timezone=value.timezone,id=value.id,name=value.name,time=value.time",
+    "topic.weather-rotterdam.weatherdb.reportrotterdam.mapping": "lon=value.lon,lat=value.lat,weather=value.weather,weather_description=value.weatherDescription,temp=value.temp,feels_like=value.feels_like,temp_min=value.temp_min,temp_max=value.temp_max,pressure=value.pressure,humidity=value.humidity,visibility=value.visibility,wind_speed=value.windSpeed,clouds=value.clouds,dt=value.dt,sys_type=value.sysType,sys_id=value.sysId,sys_country=value.sysCountry,sys_sunrise=value.sysSunrise,sys_sunset=value.sysSunset,timezone=value.timezone,id=value.id,name=value.name,time=value.time",
+    "topic.weather-delft.weatherdb.reportdelft.mapping": "lon=value.lon,lat=value.lat,weather=value.weather,weather_description=value.weatherDescription,temp=value.temp,feels_like=value.feels_like,temp_min=value.temp_min,temp_max=value.temp_max,pressure=value.pressure,humidity=value.humidity,visibility=value.visibility,wind_speed=value.windSpeed,clouds=value.clouds,dt=value.dt,sys_type=value.sysType,sys_id=value.sysId,sys_country=value.sysCountry,sys_sunrise=value.sysSunrise,sys_sunset=value.sysSunset,timezone=value.timezone,id=value.id,name=value.name,time=value.time",
+    
+
+    "topic.weather.weatherdb.report.consistencyLevel": "LOCAL_QUORUM",
+    "topic.weather-london.weatherdb.reportlondon.consistencyLevel": "LOCAL_QUORUM",
+    "topic.weather-liverpool.weatherdb.reportliverpool.consistencyLevel": "LOCAL_QUORUM",
+    "topic.weather-manchester.weatherdb.reportmanchester.consistencyLevel": "LOCAL_QUORUM",
+
+    "topic.weather-paris.weatherdb.reportparis.consistencyLevel": "LOCAL_QUORUM",
+    "topic.weather-nantes.weatherdb.reportnantes.consistencyLevel": "LOCAL_QUORUM",
+    "topic.weather-toulouse.weatherdb.reporttoulouse.consistencyLevel": "LOCAL_QUORUM",
+
+    "topic.weather-amsterdam.weatherdb.reportamsterdam.consistencyLevel": "LOCAL_QUORUM",
+    "topic.weather-rotterdam.weatherdb.reportrotterdam.consistencyLevel": "LOCAL_QUORUM",
+    "topic.weather-delft.weatherdb.reportdelft.consistencyLevel": "LOCAL_QUORUM"
+
   }
 }
 
