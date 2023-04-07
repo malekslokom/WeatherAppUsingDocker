@@ -14,16 +14,13 @@ if __name__ == "__main__":
     CASSANDRA_HOST = os.environ.get("CASSANDRA_HOST", "cassandra")
     CASSANDRA_KEYSPACE = os.environ.get("CASSANDRA_KEYSPACE", "kafkapipeline")
 
-    path = os.path.dirname(os.path.realpath(__file__))
-    parent = os.path.dirname(path) + "/data/"
-    csvbackupfile = parent + "weather.csv"
-    print(KAFKA_BROKER_URL)
+    # path = os.path.dirname(os.path.realpath(__file__))
+    # parent = os.path.dirname(path) + "/data/"
+    # csvbackupfile = parent + "weather.csv"
+
     print("Setting up Kafka consumer at {}".format(KAFKA_BROKER_URL))
     
-    consumer = KafkaConsumer("weather", bootstrap_servers=[KAFKA_BROKER_URL],api_version=(0, 10, 1),auto_offset_reset='latest')
-    print(consumer.config)
-    print(consumer.bootstrap_connected())
-
+    consumer = KafkaConsumer("weather-london", bootstrap_servers=[KAFKA_BROKER_URL],api_version=(0, 10, 1),auto_offset_reset='latest')
     print('Waiting for msg...')
     for msg in consumer:
         print('got one!')
