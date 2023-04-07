@@ -11,14 +11,14 @@ COPY . /app
 RUN pip install --no-cache-dir -r App/requirements.txt
 
 # Expose port 5000 for the Flask app
-#EXPOSE 5000
+EXPOSE 5002
 
 # Set environment variables
-ENV KAFKA_BROKER_URL localhost:9092
-ENV TOPIC_NAME weather
+ENV KAFKA_BROKER_URL broker:29092
+ENV TOPIC_NAME weather-london
 ENV CASSANDRA_HOST cassandra
 ENV CASSANDRA_KEYSPACE weatherdb
 
 # Run the command to start the Flask app
-CMD ["python", "-u", "App/app.py"]
+CMD ["python3.8", "App/app.py"]
 

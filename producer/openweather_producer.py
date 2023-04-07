@@ -8,12 +8,12 @@ from datetime import datetime
 
 KAFKA_BROKER_URL = os.environ.get("KAFKA_BROKER_URL")
 TOPIC_NAME = os.environ.get("WEATHER_TOPIC")
-print(TOPIC_NAME)
+print(KAFKA_BROKER_URL)
 # SLEEP_TIME = int(os.environ.get("SLEEP_TIME", "60"))
 
 
 # Configuration des serveurs Kafka
-bootstrap_servers = ['localhost:9092'] #['localhost:9092']
+bootstrap_servers = ['broker:29092'] #['localhost:9092']
 
 # Configuration de l'API OpenWeatherMap
 api_key = 'cf855657d928f11ff713b34d631de653'
@@ -76,6 +76,7 @@ while True:
             print(topic_name)
             # Envoyer les données à Kafka
             producer.send(topic_name, value=newData)
+            print('data sent')
         # Attendre avant d'envoyer les données suivantes
         time.sleep(300)
         
