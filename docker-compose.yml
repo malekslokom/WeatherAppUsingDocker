@@ -75,13 +75,31 @@ services:
     container_name: cassandra
     volumes:
       - $PWD/cassandra/data:/var/lib/cassandra
+    networks:
+      - cassandra-network
+    
+
   kafka-producer:
     image: kafka-producer:latest
     hostname: kafka-producer
     container_name: kafka-producer
     tty: true
 
+  weatherconsumerapp:
+    container_name: web
+    build:
+      context: .
+      dockerfile: Dockerfile-app
+    networks:
+      - cassandra-network
+    environment:
+      KAFKA_BROKER_URL: localhost:9092
+      TOPIC_NAME: weather
+      CASSANDRA_HOST: cassandra
+      CASSANDRA_KEYSPACE: weatherdb
+    command: ["python", "-u","App/app.py"]
+    volumes:
+      - $PWD/app/data:/usr/app/data
+
 networks:
-  default:
-    external:
-      name: kafka-network
+  cassandra-network:
