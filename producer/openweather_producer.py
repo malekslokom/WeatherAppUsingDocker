@@ -13,7 +13,7 @@ print(TOPIC_NAME)
 
 
 # Configuration des serveurs Kafka
-bootstrap_servers = ['0.0.0.0:9092'] #['localhost:9092']
+bootstrap_servers = ['localhost:9092'] #['localhost:9092']
 
 # Configuration de l'API OpenWeatherMap
 api_key = 'cf855657d928f11ff713b34d631de653'
@@ -58,7 +58,7 @@ while True:
             newData['id']=data['id']
             newData['name']=data['name']
             now = datetime.now()
-            newData['time']=now.strftime("%H:%M:%S")
+            newData['time']=now.strftime("%m/%d/%y %H:%M:%S")
             print(newData)
             # x =  '{ "time":"2023-03-23 08:48:06", "description":"cloud"}'
             # data=json.loads(x)

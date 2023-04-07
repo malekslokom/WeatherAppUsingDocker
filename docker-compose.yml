@@ -1,10 +1,135 @@
----
+# ---
+# version: '2'
+# services:
+
+#   zookeeper:
+#     image: confluentinc/cp-zookeeper:latest
+#     container_name: zookeeper
+#     networks:
+#       - mynetwork
+#     environment:
+#       ZOOKEEPER_CLIENT_PORT: 2181
+#       ZOOKEEPER_TICK_TIME: 2000
+
+#   broker:
+#     image: confluentinc/cp-kafka:latest
+#     container_name: kafka-broker
+#     depends_on:
+#       - zookeeper
+#     ports:
+#       - 9092:9092
+#     networks:
+#       - mynetwork
+#     environment:
+#       KAFKA_BROKER_ID: 1
+#       KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+#       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_INTERNAL:PLAINTEXT
+#       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,PLAINTEXT_INTERNAL://broker:29092
+#       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+#       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+#       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR:
+      
+#   connect:
+#     image: datastax-connect:latest
+#     hostname: datastax-connect
+#     container_name: datastax-connect
+#     depends_on:
+#       - zookeeper
+#       - broker
+#     ports:
+#       - "8083:8083"
+#     networks:
+#       - mynetwork
+#     environment:
+#       CONNECT_BOOTSTRAP_SERVERS: 'broker:29092'
+#       CONNECT_REST_ADVERTISED_HOST_NAME: datastax-connect
+#       CONNECT_REST_PORT: 8083
+#       CONNECT_GROUP_ID: datastax-connect-group
+#       CONNECT_CONFIG_STORAGE_TOPIC: docker-connect-configs
+#       CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: 1
+#       CONNECT_OFFSET_FLUSH_INTERVAL_MS: 10000
+#       CONNECT_OFFSET_STORAGE_TOPIC: docker-connect-offsets
+#       CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: 1
+#       CONNECT_STATUS_STORAGE_TOPIC: docker-connect-status
+#       CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: 1
+#       CONNECT_KEY_CONVERTER: org.apache.kafka.connect.storage.StringConverter
+#       CONNECT_VALUE_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+#       CONNECT_VALUE_CONVERTER_SCHEMAS_ENABLE: "false"
+#       CONNECT_INTERNAL_KEY_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+#       CONNECT_INTERNAL_VALUE_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+#       CONNECT_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+
+#   kafka-manager:
+#     image: hlebalbau/kafka-manager
+#     container_name: kafka-manager
+#     ports:
+#       - "9000:9000"
+#     environment:
+#       ZK_HOSTS: "zookeeper:2181"
+
+#   openweather:
+#     container_name: openweather
+#     build:
+#       context: .
+#       dockerfile: Dockerfile-producer
+#     volumes:
+#        - .:/producer
+#     networks:
+#       - mynetwork
+#     environment:
+#       KAFKA_BROKER_URL: localhost:29092
+
+
+#   cassandra:
+#     image: cassandra:3.11
+#     hostname: cassandra
+#     container_name: cassandra
+#     volumes:
+#       - $PWD/cassandra/data:/var/lib/cassandra
+#     networks:
+#       - mynetwork
+    
+
+#   kafka-producer:
+#     image: kafka-producer:latest
+#     hostname: kafka-producer
+#     container_name: kafka-producer
+#     tty: true
+#     networks:
+#       - mynetwork
+  
+#   weatherconsumerapp:
+#     container_name: web
+#     build:
+#       context: .
+#       dockerfile: Dockerfile-app
+#     ports:
+#       - "5002:5000"
+#     networks:
+#       - mynetwork
+#     environment:
+#       KAFKA_BROKER_URL: localhost:9092
+#       TOPIC_NAME: weather
+#       CASSANDRA_HOST: cassandra
+#       CASSANDRA_KEYSPACE: weatherdb
+#     command: ["python", "-u","App/app.py"]
+#     volumes:
+#       - $PWD/app/data:/usr/app/data
+
+  
+
+# networks:
+#   mynetwork:
+
 version: '2'
+
 services:
 
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
     container_name: zookeeper
+    networks:
+      - mynetwork
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
@@ -16,23 +141,17 @@ services:
       - zookeeper
     ports:
       - 9092:9092
+    networks:
+      - mynetwork
     environment:
-    #   KAFKA_BROKER_ID: 1
-    #   KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-    #  # KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker:29092,PLAINTEXT_HOST://localhost:9092 #PLAINTEXT://broker:29092
-    #   KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,PLAINTEXT_INTERNAL://broker:29092
-    #   KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-    #   KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
-    #   KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_INTERNAL:PLAINTEXT
-      # KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://20.16.155.55:9092,PLAINTEXT_INTERNAL://broker:29092
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,PLAINTEXT_INTERNAL://broker:29092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR:
-      
+
   connect:
     image: datastax-connect:latest
     hostname: datastax-connect
@@ -42,6 +161,8 @@ services:
       - broker
     ports:
       - "8083:8083"
+    networks:
+      - mynetwork
     environment:
       CONNECT_BOOTSTRAP_SERVERS: 'broker:29092'
       CONNECT_REST_ADVERTISED_HOST_NAME: datastax-connect
@@ -60,6 +181,7 @@ services:
       CONNECT_INTERNAL_KEY_CONVERTER: org.apache.kafka.connect.json.JsonConverter
       CONNECT_INTERNAL_VALUE_CONVERTER: org.apache.kafka.connect.json.JsonConverter
       CONNECT_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+
   kafka-manager:
     image: hlebalbau/kafka-manager
     container_name: kafka-manager
@@ -67,6 +189,18 @@ services:
       - "9000:9000"
     environment:
       ZK_HOSTS: "zookeeper:2181"
+
+  openweather:
+    container_name: openweather
+    build:
+      context: .
+      dockerfile: Dockerfile-producer
+    volumes:
+       - .:/producer
+    networks:
+      - mynetwork
+    environment:
+      KAFKA_BROKER_URL: "localhost:9092"
 
 
   cassandra:
@@ -76,7 +210,9 @@ services:
     volumes:
       - $PWD/cassandra/data:/var/lib/cassandra
     networks:
-      - cassandra-network
+      - mynetwork
+    ports:
+      - "9042:9042"
     
 
   kafka-producer:
@@ -84,22 +220,27 @@ services:
     hostname: kafka-producer
     container_name: kafka-producer
     tty: true
+    networks:
+      - mynetwork
+    environment:
+      KAFKA_BROKER_URL: "broker:29092"
 
   weatherconsumerapp:
-    container_name: web
+    container_name: weather-consumer-app
     build:
       context: .
       dockerfile: Dockerfile-app
-    networks:
-      - cassandra-network
+      args:
+        APP_ENV: production
     environment:
-      KAFKA_BROKER_URL: localhost:9092
-      TOPIC_NAME: weather
-      CASSANDRA_HOST: cassandra
-      CASSANDRA_KEYSPACE: weatherdb
-    command: ["python", "-u","App/app.py"]
-    volumes:
-      - $PWD/app/data:/usr/app/data
-
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - KAFKA_TOPIC=weather
+    depends_on:
+      - cassandra
+    networks:
+      - mynetwork
+      
 networks:
-  cassandra-network:
+  mynetwork:
+    attachable: true
+
