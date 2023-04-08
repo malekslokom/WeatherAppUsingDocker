@@ -20,6 +20,7 @@
     "topic.weather-delft.weatherdb.reportdelft.mapping": "lon=value.lon,lat=value.lat,weather=value.weather,weather_description=value.weatherDescription,temp=value.temp,feels_like=value.feels_like,temp_min=value.temp_min,temp_max=value.temp_max,pressure=value.pressure,humidity=value.humidity,visibility=value.visibility,wind_speed=value.windSpeed,clouds=value.clouds,dt=value.dt,sys_type=value.sysType,sys_id=value.sysId,sys_country=value.sysCountry,sys_sunrise=value.sysSunrise,sys_sunset=value.sysSunset,timezone=value.timezone,id=value.id,name=value.name,time=value.time",
     
 
+
     "topic.weather.weatherdb.report.consistencyLevel": "LOCAL_QUORUM",
     "topic.weather-london.weatherdb.reportlondon.consistencyLevel": "LOCAL_QUORUM",
     "topic.weather-liverpool.weatherdb.reportliverpool.consistencyLevel": "LOCAL_QUORUM",

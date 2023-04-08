@@ -2,7 +2,7 @@
 ### Setup
 Clone this repository
 ```
-git clone https://github.com/DataStax-Examples/kafka-connector-sink-json.git
+git clone https://github.com/malekslokom/WeatherAppUsingDocker.git
 ```
 
 Go to the directory
@@ -33,7 +33,7 @@ docker exec -it kafka-broker bash
 ```
 Create the topic
 ```
-kafka-topics --create --zookeeper zookeeper:2181 --replication-factor 1 --partitions 10 --topic json-stream --config retention.ms=-1
+kafka-topics --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 10 --topic weather --config retention.ms=-1
 ```
 
 #### Create the Cassandra tables
@@ -44,37 +44,21 @@ docker exec -it cassandra cqlsh
 Create the tables that the connector will write to. Note that a single instance of the connector can write Kafka records to multiple tables.
 ```
 create keyspace if not exists kafka_examples with replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
-create table if not exists kafka_examples.stocks_table_by_symbol (symbol text, datetime timestamp, exchange text, industry text, name text, value double, PRIMARY KEY (symbol, datetime));
-create table if not exists kafka_examples.stocks_table_by_exchange (symbol text, datetime timestamp, exchange text, industry text, name text, value double, PRIMARY KEY (exchange, datetime));
-create table if not exists kafka_examples.stocks_table_by_industry (symbol text, datetime timestamp, exchange text, industry text, name text, value double, PRIMARY KEY (industry, datetime));
+CREATE TABLE weatherdb.reportLondon ( lon float, lat float, weather text, weather_description text, temp float, feels_like float, temp_min float, temp_max float, pressure int, humidity int, visibility int, wind_speed float, rain1h float, clouds int, dt bigint, sys_type int, sys_id int, sys_country text, sys_sunrise bigint, sys_sunset bigint, timezone int, id int, name text,time text, PRIMARY KEY (time) );
 ```
 
-#### Load data into Kafka
-Start a bash shell on the Kafka Producer
-```
-docker exec -it kafka-producer bash
-```
-Write 1000 records ( 10 stocks, 100 records per stock ) to Kafka using the JSON Java Producer in this project
-```
-mvn clean compile exec:java -Dexec.mainClass=json.JsonProducer -Dexec.args="json-stream 10 100 broker:29092"
-```
-There will be many lines of output in your console as Maven pulls down the dependencies. The following output means that it completed successfully
-```
-2020-03-09 18:01:34.268 [json.JsonProducer.main()] INFO  - Completed loading 1000/1000 records to Kafka in 1 seconds
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time: 20.254 s
-[INFO] Finished at: 2020-03-09T18:01:34+00:00
-[INFO] Final Memory: 31M/215M
-[INFO] ------------------------------------------------------------------------
-```
 
-#### Start the DataStax Kafka Connector
+
+#### Start start sink endPoint
 Execute the following command from the machine where docker is running to start the connector using the Kafka Connect REST API
 ```
 curl -X POST -H "Content-Type: application/json" -d @connector-config.json "http://localhost:8083/connectors"
 ```
+
+restart sink :
+curl -X POST "http://worker_ip:rest_port/connectors/connector/restart"
+delete sink :
+curl -X DELETE "http://worker_ip:port/connectors/connector"
 
 #### Confirm rows written to Cassandra
 Start a cqlsh shell on the Cassandra node
@@ -84,59 +68,5 @@ docker exec -it cassandra cqlsh
 
 Confirm rows were written to each of the Cassandra tables
 ```
-select * from kafka_examples.stocks_table_by_symbol limit 10;
-```
-```
- symbol | datetime                        | exchange | industry | name        | value
---------+---------------------------------+----------+----------+-------------+----------
-    XOM | 2020-03-09 18:27:07.289000+0000 |     NYSE |   ENERGY | EXXON MOBIL | 79.53462
-    XOM | 2020-03-09 18:27:17.289000+0000 |     NYSE |   ENERGY | EXXON MOBIL | 79.94343
-    XOM | 2020-03-09 18:27:27.289000+0000 |     NYSE |   ENERGY | EXXON MOBIL | 79.46183
-    XOM | 2020-03-09 18:27:37.289000+0000 |     NYSE |   ENERGY | EXXON MOBIL |  80.1765
-    XOM | 2020-03-09 18:27:47.289000+0000 |     NYSE |   ENERGY | EXXON MOBIL | 80.44787
-    XOM | 2020-03-09 18:27:57.289000+0000 |     NYSE |   ENERGY | EXXON MOBIL |  79.9512
-    XOM | 2020-03-09 18:28:07.289000+0000 |     NYSE |   ENERGY | EXXON MOBIL | 80.08623
-    XOM | 2020-03-09 18:28:17.289000+0000 |     NYSE |   ENERGY | EXXON MOBIL | 80.42811
-    XOM | 2020-03-09 18:28:27.289000+0000 |     NYSE |   ENERGY | EXXON MOBIL | 80.22866
-    XOM | 2020-03-09 18:28:37.289000+0000 |     NYSE |   ENERGY | EXXON MOBIL | 80.00116
-
-(10 rows)
-```
-```
-select * from kafka_examples.stocks_table_by_exchange limit 10;
-```
-```
- exchange | datetime                        | industry | name  | symbol | value
-----------+---------------------------------+----------+-------+--------+-----------
-   NASDAQ | 2020-03-09 18:27:06.289000+0000 |     TECH | APPLE |   APPL | 208.25739
-   NASDAQ | 2020-03-09 18:27:16.289000+0000 |     TECH | APPLE |   APPL | 208.39239
-   NASDAQ | 2020-03-09 18:27:26.289000+0000 |     TECH | APPLE |   APPL | 208.26644
-   NASDAQ | 2020-03-09 18:27:36.289000+0000 |     TECH | APPLE |   APPL | 207.48437
-   NASDAQ | 2020-03-09 18:27:46.289000+0000 |     TECH | APPLE |   APPL | 207.42801
-   NASDAQ | 2020-03-09 18:27:56.289000+0000 |     TECH | APPLE |   APPL | 207.62685
-   NASDAQ | 2020-03-09 18:28:06.289000+0000 |     TECH | APPLE |   APPL | 207.62004
-   NASDAQ | 2020-03-09 18:28:16.289000+0000 |     TECH | APPLE |   APPL | 206.49582
-   NASDAQ | 2020-03-09 18:28:26.289000+0000 |     TECH | APPLE |   APPL | 206.21018
-   NASDAQ | 2020-03-09 18:28:36.289000+0000 |     TECH | APPLE |   APPL | 205.53896
-
-(10 rows)
-```
-```
-select * from kafka_examples.stocks_table_by_industry limit 10;
-```
-```
- industry | datetime                        | exchange | name    | symbol | value
-----------+---------------------------------+----------+---------+--------+----------
-   RETAIL | 2020-03-09 18:27:04.289000+0000 |     NYSE | WALMART |    WMT | 89.45163
-   RETAIL | 2020-03-09 18:27:14.289000+0000 |     NYSE | WALMART |    WMT | 89.36504
-   RETAIL | 2020-03-09 18:27:24.289000+0000 |     NYSE | WALMART |    WMT | 89.24324
-   RETAIL | 2020-03-09 18:27:34.289000+0000 |     NYSE | WALMART |    WMT | 89.83376
-   RETAIL | 2020-03-09 18:27:44.289000+0000 |     NYSE | WALMART |    WMT |  90.1238
-   RETAIL | 2020-03-09 18:27:54.289000+0000 |     NYSE | WALMART |    WMT |  89.5875
-   RETAIL | 2020-03-09 18:28:04.289000+0000 |     NYSE | WALMART |    WMT | 90.08323
-   RETAIL | 2020-03-09 18:28:14.289000+0000 |     NYSE | WALMART |    WMT | 89.49746
-   RETAIL | 2020-03-09 18:28:24.289000+0000 |     NYSE | WALMART |    WMT | 89.15786
-   RETAIL | 2020-03-09 18:28:34.289000+0000 |     NYSE | WALMART |    WMT | 89.12892
-
-(10 rows)
+select * from weatherdb.reportlondon;
 ```

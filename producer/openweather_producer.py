@@ -27,7 +27,7 @@ while True:
     try:
         for city in CITY_NAMES:
             print(city)
-            url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}"
+            url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
             print(url)
             # Obtenir les données météorologiques
             response = requests.get(url) 
@@ -78,7 +78,7 @@ while True:
             producer.send(topic_name, value=newData)
             print('data sent')
         # Attendre avant d'envoyer les données suivantes
-        time.sleep(300)
+        time.sleep(60)
         
 
     except Exception as e:

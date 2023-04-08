@@ -73,9 +73,9 @@ services:
     container_name: openweather
     build:
       context: .
-      dockerfile: Dockerfile-producer
+      dockerfile: Dockerfile-producer-forecast
     volumes:
-       - .:/producer
+       - .:/producer-forecast
     networks:
       - mynetwork
     environment:
