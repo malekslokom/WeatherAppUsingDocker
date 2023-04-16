@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="shortcut icon" href="../static/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Forecastify</title>
+</head>
+<body onload="start()">
+
+    <main >
+        <div class="containerLoad">
+            <div class="loader">
+                <div class="bar1"></div>
+                <div class="bar2"></div>
+                <div class="bar3"></div>
+                <div class="bar4"></div>
+                <div class="bar5"></div>
+                <div class="bar6"></div>
+                <div class="bar7"></div>
+                <div class="bar8"></div>
+                <div class="bar9"></div>
+                <div class="bar10"></div>
+                <div class="bar11"></div>
+                <div class="bar12"></div>
+            </div>
+        </div>
+        <div class="init">
+            <div class="left-size">
+                <img class="big-ilus" src="../static/img/initial-ilustration.png" alt="ilustration">
+            </div>
+            <div class="rigth-size">
+                <img class="small-ilus" src="../static/img/initial-ilustration.png" alt="ilustration">
+                <h1>Forecastify</h1>
+                <span>Weather App</span>
+                <button class="btn-start">Start</button> 
+            </div>
+            <div class="warningLocationUser">
+                <div class="boxWarning">
+                    
+                    <p>To continue, provide your location...</p>
+                    <div class="containerButtons">
+                        <button class="confirmLocation">Continue</button>
+                        <button class="deniedLocation">View in static mode</button>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="header">
+            <img class="header-ilus" src="../static/img/initial-ilustration.png" alt="ilustration">
+            <div class="option weather">
+                <i class="iconHeader fa-solid fa-cloud-sun-rain"></i>
+                <span>Weather</span>
+            </div>
+            <div class="option cities ">
+                <i class="iconHeader fa-solid fa-list"></i>
+                <span>Cities</span>
+            </div>
+            <div class="option map ">
+                <i class="iconHeader fa-solid fa-map"></i>
+                <span>Map</span>
+            </div>
+            <div class="option profil ">
+                <i class="iconHeader fa-solid fa-user"></i>
+                <span>Ptofil</span>
+            </div>
+        </div>
+        <div class="weatherComponent">
+            <div class="bar">Based on your location</div>
+            <div class=" chance-Of-Rain">
+                <div class="info-city">
+                    <h2 class="cityName">Madrid</h2>
+                    <h3 class="climateCity">Sunny</h3>
+                </div>
+                
+                <h2 class="graus">25°</h2>
+                <div class="sun">
+                    <img src="../static/img/ilustraçãoSol.png" alt="imagem sol">
+                </div>
+                
+            </div>
+            <div class=" today-forecast">
+                <h3>Today's forecast</h3>
+                <div class="grid-previsao">
+                        <div class="box-hours six-am">
+                            <span>6:00 AM</span>
+                            <img class="icon-pre-rain imgSixAm" src="../static/img/chuva-leve-2.png" alt="tornado">
+                            <span>25°</span>
+                        </div>
+                        <div class="box-hours nine">
+                            <span>9:00 AM</span>
+                            <img class="icon-pre-rain imgNineAm" src="../static/img/ensolarado.png" alt="tornado">
+                            <span>35°</span>
+                        </div>
+                        <div class="box-hours twelve">
+                            <span>12:00 AM</span>
+                            <img class="icon-pre-rain imgTwelveAm" src="../static/img/nuvens-esparças.png" alt="tornado">
+                            <span>30°</span>
+                        </div>
+                        <div class="box-hours three">
+                            <span>3:00 PM</span>
+                            <img class="icon-pre-rain imgThreePm" src="../static/img/clima-ventoso.png" alt="tornado">
+                            <span>30°</span>
+                        </div>
+                        <div class="box-hours six-pm">
+                            <span>6:00 PM</span>
+                            <img class="icon-pre-rain imgSixPm" src="../static/img/chuva-forte-6.png" alt="tornado">
+                            <span>27°</span>
+                        </div>
+                        <div class="box-hours nine-pm">
+                            <span>9:00 PM</span>
+                            <img class="icon-pre-rain imgNinePm" src="../static/img/storm.png" alt="tornado">
+                            <span>22°</span>
+                        </div>
+                </div>  
+            </div>
+            <div class=" air-conditions">
+                <h3>Air conditions</h3>
+                <i class="fa-solid fa-cloud"></i>
+                <div class="container-info-air">
+                    <div class="real-feel"> 
+                        <span>Wind chill factor/Feels like temperature</span>
+                        <span class="sensacao-termica">29°</span>
+                    </div>
+                    <div class="wind"> 
+                        <span>Wind speed</span>
+                        <span class="velocidade-vento">0.20km/h</span>
+                    </div>
+                    <div class="chance-of-rain"> 
+                        <span>Air humidity</span>
+                        <span class="Umidade">30%</span>
+                    </div>
+                    <div class="uv-index"> 
+                        <span>Visibility</span>
+                        <span class="Visibilidade">10000</span>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class=" weekforecast">
+                <h2>Five-day forecast</h2>
+                <div class="containerHours">
+
+                    <div class="days day1">
+                        <div class="hours active ">
+
+                            <div class="dia">
+                                Today
+                            </div>
+
+                            <div class="clima">
+                                <img src="../static/img/chuva-leve-2.png" alt="Tempestade">
+                                <span>Light rain</span>
+                            </div>
+                            
+                            <div class="data">
+                                21:00
+                            </div>
+
+                        </div>
+                        <div class="hours ">
+
+                            <div class="dia">
+                                Today
+                            </div>
+
+                            <div class="clima">
+                                <img src="../static/img/ensolarado.png" alt="Tempestade">
+                                <span>Storm</span>
+                            </div>
+                            
+                            <div class="data">
+                                02/03
+                            </div>
+
+                        </div>
+                        <div class="hours ">
+
+                            <div class="dia">
+                                Today
+                            </div>
+
+                            <div class="clima">
+                                <img  src="../static/img/nuvens-esparças.png" alt="Tempestade">
+                                <span>Storm</span>
+                            </div>
+                            
+                            <div class="data">
+                                03/03
+                            </div>
+
+                        </div>
+                        <div class="hours ">
+
+                            <div class="dia">
+                                Today
+                            </div>
+
+                            <div class="clima">
+                                <img src="../static/img/risco de chuva.png" alt="Tempestade">
+                                <span>Storm</span>
+                            </div>
+                            
+                            <div class="data">
+                                04/03
+                            </div>
+
+                        </div>
+                        <div class="hours ">
+
+                            <div class="dia">
+                                Today
+                            </div>
+
+                            <div class="clima">
+                                <img src="../static/img/risco de chuva.png" alt="Tempestade">
+                                <span>Storm</span>
+                            </div>
+                            
+                            <div class="data">
+                                05/03
+                            </div>
+
+                        </div>
+                         <div class="hours ">
+
+                            <div class="dia">
+                                Today
+                            </div>
+
+                            <div class="clima">
+                                <img src="../static/img/risco de chuva.png" alt="Tempestade">
+                                <span>Storm</span>
+                            </div>
+                            
+                            <div class="data">
+                                06/03
+                            </div>
+
+                        </div>
+                         <div class="hours ">
+
+                            <div class="dia">
+                                Today
+                            </div>
+
+                            <div class="clima">
+                                <img src="../static/img/risco de chuva.png" alt="Tempestade">
+                                <span>Storm</span>
+                            </div>
+                            
+                            <div class="data">
+                                07/03
+                            </div>
+
+                        </div>
+                         <div class="hours ">
+
+                            <div class="dia">
+                                Today
+                            </div>
+
+                            <div class="clima">
+                                <img src="../static/img/risco de chuva.png" alt="Tempestade">
+                                <span>Storm</span>
+                            </div>
+                            
+                            <div class="data">
+                                08/03
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="days day2">
+                        <div class="hours active ">
+
+                            <div class="dia">
+                                Today
+                            </div>
+
+                            <div class="clima">
+                                <img  src="../static/img/nuvens-esparças.png" alt="Tempestade">
+                                <span>Scattered clouds</span>
+                            </div>
+                            
+                            <div class="data">
+                               12:00
+                            </div>
+
+                        </div>
+                        <div class="hours ">
+
+                            <div class="dia">
+                                Today
+                            </div>
+
+                            <div class="clima">
+                                <img src="../static/img/risco de chuva.png" alt="Tempestade">
+                                <span>Storm</span>
+                            </div>
+                            
+                            <div class="data">
+                                02/03
+                            </div>
+
+                        </div>
+                        <div class="hours ">
+
+                            <div class="dia">
+                                Today
+                            </div>
+
+                            <div class="clima">
+                                <img src="../static/img/risco de chuva.png" alt="Tempestade">
+                                <span>Storm</span>
+                            </div>
+                            
+                            <div class="data">
+                                03/03
+                            </div>
+
+                        </div>
+                        <div class="hours ">
+
+                            <div class="dia">
+                                Today
+                            </div>
+
+                            <div class="clima">
+                                <img src="../static/img/risco de chuva.png" alt="Tempestade">
+                                <span>Storm</span>
+                            </div>
+                            
+                            <div class="data">
+                                04/03
+                            </div>
+
+                        </div>
+                        <div class="hours ">
+
+                            <div class="dia">
+                                Today
+                            </div>
+
+                            <div class="clima">
+                                <img src="../static/img/risco de chuva.png" alt="Tempestade">
+                                <span>Storm</span>
+                            </div>
+                            
+                            <div class="data">
+                                05/03
+                            </div>
+
+                        </div>
+                         <div class="hours ">
+
+                            <div class="dia">
+                                Today
+                            </div>
+
+                            <div class="clima">
+                                <img src="../static/img/risco de chuva.png" alt="Tempestade">
+                                <span>Storm</span>
+                            </div>
+                            
+                            <div class="data">
+                                06/03
+                            </div>
+
+                        </div>
+                         <div class="hours ">
+
+                            <div class="dia">
+                                Today
+                            </div>
+
+                            <div class="clima">
+                                <img src="../static/img/risco de chuva.png" alt="Tempestade">
+                                <span>Storm</span>
+                            </div>
+                            
+                            <div class="data">
+                                07/03
+                            </div>
+
+                        </div>
+                         <div class="hours ">
+
+                            <div class="dia">
+                                Today
+                            </div>
+
+                            <div class="clima">
+                                <img src="../static/img/risco de chuva.png" alt="Tempestade">
+                                <span>Storm</span>
+                            </div>
+                            
+                            <div class="data">
+                                08/03
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="days day3">
+                        <div class="hours active ">
+
+                            <div class="dia">
+                                Today
+                            </div>
+
+                            <div class="clima">
+                                <img src="../static/img/clima-ventoso.png" alt="Tempestade">
+                                <span>Windy weather</span>
+                            </div>
+                            
+                            <div class="data">
+                                13:00
+                            </div>
+
+                        </div>
+                        <div class="hours ">
+
+                            <div class="dia">
+                                Today
+                            </div>
+
+                            <div class="clima">
+                                <img src="../static/img/risco de chuva.png" alt="Tempestade">
+                                <span>Storm</span>
+                            </div>
+                            
+                            <div class="data">
+                                02/03
+                            </div>
+
+                        </div>
+                        <div class="hours ">
+
+                            <div class="dia">
+                                Today
+                            </div>
+
+                            <div class="clima">
+                                <img src="../static/img/risco de chuva.png" alt="Tempestade">
+                                <span>Storm</span>
+                            </div>
+                            
+                            <div class="data">
+                                03/03
+                            </div>
+
+                        </div>
+                        <div class="hours ">
+
+                            <div class="dia">
+                                Today
+                            </div>
+
+                            <div class="clima">
+                                <img src="../static/img/risco de chuva.png" alt="Tempestade">
+                                <span>Storm</span>
+                            </div>
+                            
+                            <div class="data">
+                                04/03
+                            </div>
+
+                        </div>
+                        <div class="hours ">
+
+                            <div class="dia">
+                                Today
+                            </div>
+
+                            <div class="clima">
+                                <img src="../static/img/risco de chuva.png" alt="Tempestade">
+                                <span>Storm</span>
+                            </div>
+                            
+                            <div class="data">
+                                05/03
+                            </div>
+
+                        </div>
+                         <div class="hours ">
+
+                            <div class="dia">
+                                Today
+                            </div>
+
+                            <div class="clima">
+                                <img src="../static/img/risco de chuva.png" alt="Tempestade">
+                                <span>Storm</span>
+                            </div>
+                            
+                            <div class="data">
+                                06/03
+                            </div>
+
+                        </div>
+                         <div class="hours ">
+
+                            <div class="dia">
+                                Today
+                            </div>
+
+                            <div class="clima">
+                                <img src="../static/img/risco de chuva.png" alt="Tempestade">
+                                <span>Storm</span>
+                            </div>
+                            
+                            <div class="data">
+                                07/03
+                            </div>
+
+                        </div>
+                         <div class="hours ">
+
+                            <div class="dia">
+                                Today
+                            </div>
+
+                            <div class="clima">
+                                <img src="../static/img/risco de chuva.png" alt="Tempestade">
+                                <span>Storm</span>
+                            </div>
+                            
+                            <div class="data">
+                                08/03
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="days day4">
+                        <div class="hours active ">
+
+                            <div class="dia">
+                                Today
+                            </div>
+
+                            <div class="clima">
+                                <img src="../static/img/storm.png" alt="Tempestade">
+                                <span>Storm</span>
+                            </div>
+                            
+                            <div class="data">
+                                14:00
+                            </div>
+
+                        </div>
+                        <div class="hours ">
+
+                            <div class="dia">
+                                Today
+                            </div>
+
+                            <div class="clima">
+                                <img src="../static/img/risco de chuva.png" alt="Tempestade">
+                                <span>Storm</span>
+                            </div>
+                            
+                            <div class="data">
+                                02/03
+                            </div>
+
+                        </div>
+                        <div class="hours ">
+
+                            <div class="dia">
+                                Today
+                            </div>
+
+                            <div class="clima">
+                                <img src="../static/img/risco de chuva.png" alt="Tempestade">
+                                <span>Storm</span>
+                            </div>
+                            
+                            <div class="data">
+                                03/03
+                            </div>
+
+                        </div>
+                        <div class="hours ">
+
+                            <div class="dia">
+                                Today
+                            </div>
+
+                            <div class="clima">
+                                <img src="../static/img/risco de chuva.png" alt="Tempestade">
+                                <span>Storm</span>
+                            </div>
+                            
+                            <div class="data">
+                                04/03
+                            </div>
+
+                        </div>
+                        <div class="hours ">
+
+                            <div class="dia">
+                                Today
+                            </div>
+
+                            <div class="clima">
+                                <img src="../static/img/risco de chuva.png" alt="Tempestade">
+                                <span>Storm</span>
+                            </div>
+                            
+                            <div class="data">
+                                05/03
+                            </div>
+
+                        </div>
+                         <div class="hours ">
+
+                            <div class="dia">
+                                Today
+                            </div>
+
+                            <div class="clima">
+                                <img src="../static/img/risco de chuva.png" alt="Tempestade">
+                                <span>Storm</span>
+                            </div>
+                            
+                            <div class="data">
+                                06/03
+                            </div>
+
+                        </div>
+                         <div class="hours ">
+
+                            <div class="dia">
+                                Today
+                            </div>
+
+                            <div class="clima">
+                                <img src="../static/img/risco de chuva.png" alt="Tempestade">
+                                <span>Storm</span>
+                            </div>
+                            
+                            <div class="data">
+                                07/03
+                            </div>
+
+                        </div>
+                         <div class="hours ">
+
+                            <div class="dia">
+                                Today
+                            </div>
+
+                            <div class="clima">
+                                <img src="../static/img/risco de chuva.png" alt="Tempestade">
+                                <span>Storm</span>
+                            </div>
+                            
+                            <div class="data">
+                                08/03
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="days day5">
+                        
+                        <div class="hours active ">
+
+                            <div class="dia">
+                                Today
+                            </div>
+
+                            <div class="clima">
+                                <img src="../static/img/chuva-forte-6.png" alt="Tempestade">
+                                <span>Heavy rain</span>
+                            </div>
+                            
+                            <div class="data">
+                               15:00
+                            </div>
+
+                        </div>
+                        <div class="hours ">
+
+                            <div class="dia">
+                                Today
+                            </div>
+
+                            <div class="clima">
+                                <img src="../static/img/risco de chuva.png" alt="Tempestade">
+                                <span>Storm</span>
+                            </div>
+                            
+                            <div class="data">
+                                02/03
+                            </div>
+
+                        </div>
+                        <div class="hours ">
+
+                            <div class="dia">
+                                Today
+                            </div>
+
+                            <div class="clima">
+                                <img src="../static/img/risco de chuva.png" alt="Tempestade">
+                                <span>Storm</span>
+                            </div>
+                            
+                            <div class="data">
+                                03/03
+                            </div>
+
+                        </div>
+                        <div class="hours ">
+
+                            <div class="dia">
+                                Today
+                            </div>
+
+                            <div class="clima">
+                                <img src="../static/img/risco de chuva.png" alt="Tempestade">
+                                <span>Storm</span>
+                            </div>
+                            
+                            <div class="data">
+                                04/03
+                            </div>
+
+                        </div>
+                        <div class="hours ">
+
+                            <div class="dia">
+                                Today
+                            </div>
+
+                            <div class="clima">
+                                <img src="../static/img/risco de chuva.png" alt="Tempestade">
+                                <span>Storm</span>
+                            </div>
+                            
+                            <div class="data">
+                                05/03
+                            </div>
+
+                        </div>
+                         <div class="hours ">
+
+                            <div class="dia">
+                                Today
+                            </div>
+
+                            <div class="clima">
+                                <img src="../static/img/risco de chuva.png" alt="Tempestade">
+                                <span>Storm</span>
+                            </div>
+                            
+                            <div class="data">
+                                06/03
+                            </div>
+
+                        </div>
+                         <div class="hours ">
+
+                            <div class="dia">
+                                Today
+                            </div>
+
+                            <div class="clima">
+                                <img src="../static/img/risco de chuva.png" alt="Tempestade">
+                                <span>Storm</span>
+                            </div>
+                            
+                            <div class="data">
+                                07/03
+                            </div>
+
+                        </div>
+                         <div class="hours ">
+
+                            <div class="dia">
+                                Today
+                            </div>
+
+                            <div class="clima">
+                                <img src="../static/img/risco de chuva.png" alt="Tempestade">
+                                <span>Storm</span>
+                            </div>
+                            
+                            <div class="data">
+                                08/03
+                            </div>
+
+                        </div>
+
+                    </div>
+                    
+
+
+                </div>
+                
+            </div>
+        </div>
+        <div class="cityComponent">
+
+            <div class="barToSearchCity">
+                <input class="inputCitySearch" type="text" required>
+                <span>Search for a city by entering its name</span>
+                <button class="btnSearch"></button>
+            </div>
+            <div class="loadedCities fortaleza">
+                <div class="ilustacaoClimaSearch">
+                    <img src="../static/img/chuva-leve-2.png" alt="">
+                </div>
+                <div class="infoCitySearch">
+                    <div class="name">Fortress</div>
+                    <div class="horario">21:00</div>
+                </div>
+                <div class="forecastCitySearch"></div>
+                <div class="temperatura">
+                    <span>20°</span>
+                </div>
+            </div>
+            <div class="loadedCities brasilia">
+                <div class="ilustacaoClimaSearch">
+                    <img src="../static/img/chuva-leve-2.png" alt="">
+                </div>
+                <div class="infoCitySearch">
+                    <div class="name">Brasilia</div>
+                    <div class="horario">12:00</div>
+                </div>
+                <div class="forecastCitySearch"></div>
+                <div class="temperatura">
+                    <span>21°</span>
+                </div>
+            </div>
+            <div class="loadedCities saoPaulo">
+                <div class="ilustacaoClimaSearch">
+                    <img src="../static/img/chuva-leve-2.png" alt="">
+                </div>
+                <div class="infoCitySearch">
+                    <div class="name">São Paulo</div>
+                    <div class="horario">18:00</div>
+                </div>
+                <div class="forecastCitySearch"></div>
+                <div class="temperatura">
+                    <span>22°</span>
+                </div>
+            </div>
+            <div class="loadedCities rioDeJaneiro">
+                <div class="ilustacaoClimaSearch">
+                    <img src="../static/img/chuva-leve-2.png" alt="">
+                </div>
+                <div class="infoCitySearch">
+                    <div class="name">Rio de janeiro</div>
+                    <div class="horario">08:00</div>
+                </div>
+                <div class="forecastCitySearch"></div>
+                <div class="temperatura">
+                    <span>23°</span>
+                </div>
+            </div>
+
+        </div>
+        <div class="mapComponent">
+            <div class="warningWait">In development</div>
+        </div>
+        <div class="profilComponent">
+            <div class="warningWait">In development</div>
+        </div>
+
+    </main>
+
+    <script src="../static/index.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+</body>
+</html>
